@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Lesson name</th>
+          <th scope="col">Hours</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let lesson of heroes; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{lesson.name}}</td>
+          <td>{{lesson.hour}}</td>
+          <td>
+            <button
+              class="btn btn-secondary"
+              (click)="onEditLesson(lesson)">Edit</button>
+            <!-- <button
+              class="btn btn-danger"
+              (click)="onDeleteLesson(i)">Delete</button> -->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <hr>
+      <form #lessonForm="ngForm" (ngSubmit)="onSubmit(lessonForm)" class="row">
+        <div class="form-group col-md-5">
+          <label for="name">Enter Lesson</label>
+          <input type="text"
+                 id="name"
+                 class="form-control"
+                 ngModel
+                 name="name"
+                 required>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="hour">Enter Hours</label>
+          <input type="number"
+                 id="hour"
+                 class="form-control"
+                 ngModel
+                 name="hour"
+                 required>
+        </div>
+        <button class="btn btn-primary col-md-3">
+          Add</button>
+      </form>
+
+    </div>
+    <div class="col-md-6">
+      <app-lesson
+        [subject]="selectedLesson"
+      >
+       </app-lesson>
+
+       <app-form
+               [subject]="selectedLesson"
+
+  >
+  </app-form>
+    </div>
+  </div>
+</div>
+

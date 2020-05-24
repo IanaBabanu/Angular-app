@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="profileForm"  (ngSubmit)="onSubmit()">
+
+    <label>
+      Subject:
+      <input type="text" formControlName="subject">
+    </label>
+
+    <label>
+      Hours:
+      <input type="text" formControlName="hour">
+    </label>
+    <span *ngIf="!profileForm.get('hour').valid && profileForm.get('hour').touched">Invalid input</span>
+
+    <button class="btn btn-secondary col-md-3"
+    >Submit</button>
+  </form>
+
+
+  <div>{{message}}</div>
+
+  <button class="btn btn-secondary col-md-3"
+  (click)="newMessage()"
+  >Edit</button>
+
+</div>
