@@ -1,6 +1,3 @@
 export class Lesson {
-  constructor(
-    public name: string,
-    public hour: number) {
-  }
+  constructor(public name: string, public hour: number) {}
 }

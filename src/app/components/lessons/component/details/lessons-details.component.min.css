@@ -6,13 +6,11 @@
   outline: none;
   border: none;
 }
-
 tr {
   height: 70px;
   border: none;
   border-bottom: 1px solid #3e7288;
 }
-
 td {
   display: flex;
   align-items: baseline;
@@ -20,25 +18,20 @@ td {
   flex-wrap: nowrap;
   border: none;
 }
-
 tr:hover {
   cursor: pointer;
   background-color: #1e907a;
 }
-
 tr:hover .svg-arrow {
   fill: black;
 }
-
 .lesson-name {
   text-align: center;
 }
-
 .list {
   height: fit-content;
   border-right: 1px solid #3e7288;
 }
-
 .form-input {
   color: white;
   background-color: transparent;

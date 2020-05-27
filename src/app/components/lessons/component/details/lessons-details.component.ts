@@ -1,44 +1,52 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Lesson} from '../../../../models/lesson.model';
+import { NgForm } from '@angular/forms';
+import { Lesson } from '../../../../models/lesson.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SubjectService } from '../../../../subject.service';
 
 @Component({
   selector: 'app-lessons-details',
   templateUrl: './lessons-details.component.html',
-  styleUrls: ['./lessons-details.component.scss']
+  styleUrls: ['./lessons-details.component.scss', '../form/form.component.css'],
 })
-
 export class LessonsDetailsComponent implements OnInit {
+  addForm = new FormGroup({
+    subject: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
 
-  @Output() delete = new EventEmitter();
-  @Output() add = new EventEmitter();
-
-   selectedLesson: Lesson;
-   message: string;
-   heroes: Lesson[];
+    hour: new FormControl('', [Validators.required]),
+  });
+  selectedLesson: Lesson;
+  appStatus: string;
+  message: string;
+  currentLessonIndex: number;
+  lessons: Lesson[];
 
   constructor(private data: SubjectService) {
-    this.selectedLesson = {name: 'Mathematics', hour: 4};
+    this.selectedLesson = { name: 'Mathematics', hour: 4 };
   }
 
   ngOnInit() {
-    this.heroes = this.data.getHeroes();
+    this.lessons = this.data.getLessons();
   }
 
-  onDeleteLesson(index: number) {
-    this.delete.emit(index);
+  onChangeStatus() {
+    this.appStatus = 'edit';
   }
-  onEditLesson(lesson: Lesson): void {
+
+  onViewLesson(index: number, lesson: Lesson): void {
     this.selectedLesson = lesson;
-    console.log(lesson);
-
+    this.currentLessonIndex = index;
+    this.appStatus = 'view';
   }
-
-  onSubmit(lessonForm: NgForm) {
-    const formValue = lessonForm.value;
-    this.data.onAdd(formValue);
-    console.log(formValue);
+  onAdd() {
+    if (this.addForm.get('subject').valid && this.addForm.get('hour').valid) {
+      this.data.onAdd({
+        name: this.addForm.value.subject,
+        hour: this.addForm.value.hour,
+      });
+    }
   }
-
 }

@@ -1,68 +1,60 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 list">
       <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Lesson name</th>
-          <th scope="col">Hours</th>
-          <th scope="col">Actions</th>
-        </tr>
-        </thead>
         <tbody>
-        <tr *ngFor="let lesson of heroes; let i = index">
-          <th scope="row">{{i+1}}</th>
-          <td>{{lesson.name}}</td>
-          <td>{{lesson.hour}}</td>
-          <td>
-            <button
-              class="btn btn-secondary"
-              (click)="onEditLesson(lesson)">Edit</button>
-            <!-- <button
-              class="btn btn-danger"
-              (click)="onDeleteLesson(i)">Delete</button> -->
-          </td>
-        </tr>
+          <tr
+            (click)="onViewLesson(i, lesson)"
+            *ngFor="let lesson of lessons; let i = index"
+            class="subject"
+          >
+            <td>
+              <div class="lesson-name">{{ lesson.name }}</div>
+              <svg
+                class="bi bi-arrow-right-circle-fill svg-arrow"
+                width="2em"
+                height="2em"
+                viewBox="0 0 16 16"
+                fill="#1E907A"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8.354 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L9.793 7.5H5a.5.5 0 0 0 0 1h4.793l-2.147 2.146z"
+                />
+              </svg>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <hr>
-      <form #lessonForm="ngForm" (ngSubmit)="onSubmit(lessonForm)" class="row">
-        <div class="form-group col-md-5">
-          <label for="name">Enter Lesson</label>
-          <input type="text"
-                 id="name"
-                 class="form-control"
-                 ngModel
-                 name="name"
-                 required>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="hour">Enter Hours</label>
-          <input type="number"
-                 id="hour"
-                 class="form-control"
-                 ngModel
-                 name="hour"
-                 required>
-        </div>
-        <button class="btn btn-primary col-md-3">
-          Add</button>
-      </form>
+      <hr />
 
+      <form [formGroup]="addForm" (ngSubmit)="onAdd()">
+        <div class="label">Subject:</div>
+        <input type="text" formControlName="subject" />
+
+        <span
+          class="invalid-t"
+          *ngIf="
+            !addForm.get('subject').valid && addForm.get('subject').touched
+          "
+          >Subject must be at least 4 characters</span
+        >
+
+        <div class="label">Hours:</div>
+        <input type="text" formControlName="hour" />
+
+        <button class="submit-btn">Add</button>
+      </form>
     </div>
     <div class="col-md-6">
-      <app-lesson
+      <app-form
         [subject]="selectedLesson"
+        (changeStatus)="onChangeStatus($event)"
+        [currentLessonIndex]="currentLessonIndex"
+        [appStatus]="appStatus"
       >
-       </app-lesson>
-
-       <app-form
-               [subject]="selectedLesson"
-
-  >
-  </app-form>
+      </app-form>
     </div>
   </div>
 </div>
-
