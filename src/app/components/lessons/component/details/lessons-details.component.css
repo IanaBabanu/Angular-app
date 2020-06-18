@@ -1,0 +1,56 @@
+.subject {
+  color: white;
+}
+
+.arrow-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+tr {
+  height: 70px;
+  border: none;
+  border-bottom: 1px solid #3e7288;
+}
+
+td {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border: none;
+}
+
+tr:hover {
+  cursor: pointer;
+  background-color: #1e907a;
+}
+
+tr:hover .svg-arrow {
+  fill: black;
+}
+
+.lesson-name {
+  text-align: center;
+}
+
+.list {
+  height: fit-content;
+  border-right: 1px solid #3e7288;
+}
+
+.input-label {
+  display: flex;
+  flex-direction: column;
+}
+.add-btn {
+  border: none;
+  outline: none;
+  color: #3e7288;
+  font-size: 20px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
